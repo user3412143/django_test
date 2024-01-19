@@ -22,6 +22,8 @@ class MailDistribution(View):
         # send message
         for client in clients:
             # We send client.phone_number with mailing_id.message
+            # As sample: requests.post(url, data)
+            pass
         return JsonResponse({'status': 'success',
                              'code': 1})
 
@@ -34,10 +36,6 @@ class MailDistribution(View):
             return JsonResponse({'status': 'error',
                                  'message': 'Send messages doesn\'t canceling.\
  message id doesn\'t exist', 'code': 0})
-            pass
         return JsonResponse({'status': 'success',
                              'message': 'Send messages canceling',
                              'code': 1})
-
-
-mail_obj = MailDistribution()
