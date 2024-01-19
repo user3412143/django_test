@@ -17,14 +17,30 @@ Including another URLconf
 from . import views
 from .views import MailDistribution as md
 
-
 from django.contrib import admin
-from django.urls import path
+from rest_framework import permissions
+from django.urls import include, path
+
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
 app_name = 'mailing'
+
+schema_view = get_schema_view(
+        openapi.Info(
+            title='API',
+            default_version='v1',
+            description='API documentation'),
+        public=True,
+        permission_classes=(permissions.AllowAny,),
+        patterns=[
+            path('api/', include('mailing.mailing.urls'))]
+    )
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('send/<int:mailing_id>/', md.send_mailing,name='send_mailing'),
     path('cancel/<int:mailing_id>/', md.cancel_mailing, name='cancel_mailing'),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
