@@ -1,0 +1,14 @@
+stages:
+  - test
+  - build
+
+build:
+  stage: build
+    - python3 -m pip install -r requirements.txt
+    - python3 manage.py collectstatic --noinput
+# for testing a web application
+test:
+  stage: test
+  script:
+    - python3 -m pip install -r requirements.txt
+    - python3 manage.py test
