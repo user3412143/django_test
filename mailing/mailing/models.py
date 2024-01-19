@@ -8,6 +8,7 @@ class Client(models.Model):
     tag = models.CharField(max_length=50)
     timezone = models.CharField(max_length=50)
 
+
 class Mailing(models.Model):
     id = models.AutoField(primary_key=True)
     start_datetime = models.DateTimeField()
