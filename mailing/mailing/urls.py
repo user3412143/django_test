@@ -42,6 +42,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('send/<int:mailing_id>/', md.send_mailing, name='send_mailing'),
     path('cancel/<int:mailing_id>/', md.cancel_mailing, name='cancel_mailing'),
+    path('upload/', md.upload_data, name='upload_data'),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0),
          name='schema-swagger-ui'),
 ]

@@ -17,6 +17,21 @@
 	<p><a href="http://127.0.0.1:8000/mailing/cancel/4/">http://127.0.0.1:8000/mailing/cancel/4/</a></p>
 	<h3>mailing/docs</h3>
 	<p><a href="http://127.0.0.1:8000/mailing/docs">docs</a></p>
+	<h3>Отправка данных через post-запрос</h3>
+	<p>import requests<p>
+	url = 'http://127.0.0.1:8000/mailing/upload/'<p>
+	json_data = {'phone_number': '74953100000',
+             'tag': 'post',
+             'timezone': 'UTC+3',
+	     'operator_code': 'mts'}<p>
+	r = requests.post(url, json_data)<p>
+	result = r.json()<p>
+	if result['status'] == 'success':<p>
+	print('[+] A message add in DB')<p>
+	else:<p>
+	print('[-] An error occurated')<p>
+
+	</p>
 	<h3>Дополнительные задания</h3>
 	<p>Были выполнены задания с номерами: 2, 3, 5 (частично)</p>
 </body>

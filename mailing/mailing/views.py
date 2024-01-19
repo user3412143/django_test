@@ -1,6 +1,7 @@
 from .models import Client, Mailing
 
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.views import View
 
 
@@ -39,3 +40,19 @@ class MailDistribution(View):
         return JsonResponse({'status': 'success',
                              'message': 'Send messages canceling',
                              'code': 1})
+
+    @csrf_exempt
+    def upload_data(request):
+        if request.method == 'POST':
+            phone_number = request.POST.get('phone_number')
+            operator_code = request.POST.get('operator_code')
+            tag = request.POST.get('tag')
+            timezone = request.POST.get('timezone')
+
+            client = Client(phone_number=phone_number,
+                            operator_code=operator_code, tag=tag,
+                            timezone=timezone)
+            client.save()
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'messages': 'A method doesn\'t avaible'})
